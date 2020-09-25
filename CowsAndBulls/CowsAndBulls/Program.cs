@@ -138,7 +138,7 @@ namespace CowsAndBulls
                         "\nВведите длину числа с которым будет проходить игра: (число, очевидно, от 1 До 10 включительно),");
                 // Next iterations of this cycle would give message about incorrect input
                 wasInputErrorMade = true;
-            } while (!(int.TryParse(Console.ReadLine(), out input) && input < 11 || input > 0));
+            } while (!(int.TryParse(Console.ReadLine(), out input) && input < 11 && input > 0));
 
             return input;
         }
