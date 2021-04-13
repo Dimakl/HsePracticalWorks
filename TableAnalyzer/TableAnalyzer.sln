@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TableAnalyzer", "TableAnalyzer\TableAnalyzer.csproj", "{DFBA8244-FE97-448A-BFB7-0A99AC4C820E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFBA8244-FE97-448A-BFB7-0A99AC4C820E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFBA8244-FE97-448A-BFB7-0A99AC4C820E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFBA8244-FE97-448A-BFB7-0A99AC4C820E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFBA8244-FE97-448A-BFB7-0A99AC4C820E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1FDC306F-0E0D-432C-B684-917062A11919}
+	EndGlobalSection
+EndGlobal
