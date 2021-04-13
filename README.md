@@ -1,1 +1,1 @@
-Small c# projects for HSE.
+Small C# projects, done as homework for university programming classes.
