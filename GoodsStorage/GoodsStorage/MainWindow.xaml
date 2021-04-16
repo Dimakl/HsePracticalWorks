@@ -14,13 +14,46 @@
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <TreeView Grid.Column="0" Grid.Row="0" Name="treeMenu" MouseLeftButtonUp="treeMenu_MouseLeftButtonUp">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type Section}" ItemsSource="{Binding Items}">
-                    <TextBlock Text="{Binding Title}" />
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
-        <TextBlock Grid.Column="1" Grid.Row="0" Name="sectionNameTextBlock" >Lorem ipsum</TextBlock>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TreeView Grid.Column="0" Grid.Row="0" Name="treeMenu" MouseLeftButtonUp="treeMenu_MouseLeftButtonUp">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type Section}" ItemsSource="{Binding Items}">
+                        <TextBlock Text="{Binding Title}" />
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <Grid  Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Name="UploadJsonButton" Click="UploadJsonButton_Click" >
+                    <TextBlock>Выгрузить текущее состояние <LineBreak/>склада в storage.bin</TextBlock></Button>
+                <Button Grid.Column="1" Grid.Row="0" Name="LoadJsonButton" Click="LoadJsonButton_Click">
+                    <TextBlock> Загрузить состояние <LineBreak/>склада из storage.bin</TextBlock></Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Name="sectionNameTextBlock" >Lorem ipsum</TextBlock>
+            <DataGrid Grid.Column="0" Grid.Row="1" Name="productsGrid" />
+        </Grid>
     </Grid>
 </Window>
