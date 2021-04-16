@@ -23,6 +23,21 @@ namespace GoodsStorage
         public MainWindow()
         {
             InitializeComponent();
+            Section root = new Section("Root");
+            Section first = new Section("First");
+            Section second = new Section("Second"); 
+            Section third = new Section("Third");
+            root.Items.Add(first);
+            root.Items.Add(second);
+            first.Items.Add(third);
+
+            treeMenu.Items.Add(root);
+        }
+
+        private void treeMenu_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            Section item = (Section) treeMenu.SelectedItem;
+            sectionNameTextBlock.Text = item.Title;
         }
     }
 }

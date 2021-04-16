@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TreeView Grid.Column="0" Grid.Row="0" Name="treeMenu" MouseLeftButtonUp="treeMenu_MouseLeftButtonUp">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type Section}" ItemsSource="{Binding Items}">
+                    <TextBlock Text="{Binding Title}" />
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+        <TextBlock Grid.Column="1" Grid.Row="0" Name="sectionNameTextBlock" >Lorem ipsum</TextBlock>
     </Grid>
 </Window>
