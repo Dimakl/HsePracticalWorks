@@ -54,6 +54,19 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Name="sectionNameTextBlock" >Lorem ipsum</TextBlock>
             <DataGrid Grid.Column="0" Grid.Row="1" Name="productsGrid" />
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Column="0" Grid.Row="0" Name="CreateCsv" Click="CreateCsv_Click">
+                    <TextBlock> Создать CSV файл <LineBreak/> с именем data.csv из товаров <LineBreak/>с количеством меньше чем<LineBreak/> введенное в окне справа<LineBreak/>(Число справа должно быть целым<LineBreak/> положительным,<LineBreak/> меньше 2147483647)</TextBlock>
+                </Button>
+                <TextBox Grid.Column="1" Grid.Row="0" Name="csvInput">Вводите число сюда</TextBox>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

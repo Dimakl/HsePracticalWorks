@@ -11,9 +11,6 @@ namespace GoodsStorage
         public string Code { get; set; }
         public int Price { get; set; }
         public int LeftInStorage { get; set; }
-        public string Description { get; set; }
-        public string PathToPhoto { get; set; }
-
         public Product()
         {
         }
@@ -21,8 +18,7 @@ namespace GoodsStorage
         public override string ToString()
         {
             return $"Название:{Name},Код:{Code}," +
-                $"Цена:{Price},Осталось:{LeftInStorage}," +
-                $"Описание:{Description},Файл фотографии:{PathToPhoto}";
+                $"Цена:{Price},Осталось:{LeftInStorage}";
         }
     }
 }
