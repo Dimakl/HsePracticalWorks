@@ -48,8 +48,8 @@ namespace GoodsStorage
             Section item = (Section) treeMenu.SelectedItem;
             if (item == null)
                 return;
-            sectionNameTextBlock.Text = item.Title;
             productsGrid.ItemsSource = item.Products;
+            tableHelpText.Visibility = Visibility.Visible;
         }
 
         private void UploadJsonButton_Click(object sender, RoutedEventArgs e)

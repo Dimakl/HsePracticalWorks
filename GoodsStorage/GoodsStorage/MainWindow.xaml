@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition MaxHeight="100"></RowDefinition>
             </Grid.RowDefinitions>
             <TreeView Grid.Column="0" Grid.Row="0" Name="treeMenu" MouseLeftButtonUp="treeMenu_MouseLeftButtonUp">
                 <TreeView.ItemTemplate>
@@ -48,11 +48,11 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="100"></RowDefinition>
                 <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition MaxHeight="100"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Name="sectionNameTextBlock" >Lorem ipsum</TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="0" Name="tableHelpText" Visibility="Hidden">1. Чтобы создать новый товар введите его данные <LineBreak/>в пустую ячейку таблицы ниже<LineBreak/>2. Чтобы изменить данные товара просто нажмите на них в этой <LineBreak/>таблице и впишите туда новые.<LineBreak/>3. Чтобы удалить товар выберите его строчку в таблице ниже <LineBreak/>и нажмите кнопку DELETE.</TextBlock>
             <DataGrid Grid.Column="0" Grid.Row="1" Name="productsGrid" />
             <Grid Grid.Column="0" Grid.Row="2">
                 <Grid.ColumnDefinitions>
