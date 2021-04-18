@@ -9,25 +9,33 @@ namespace GoodsStorage
     [Serializable]
     class Section
     {
-        public static Section ROOT = new Section("Root");
+        public static Section ROOT = new Section("Root", null);
         public string Title { get; set; }
 
         public ObservableCollection<Section> Items { get; set; }
         public ObservableCollection<Product> Products { get; private set; }
 
-        public Section(string title)
+        public Section Parent { get;}
+
+        public Section(string title, Section parent)
         {
-            this.Title = title;
-            this.Items = new ObservableCollection<Section>();
-            this.Products = new ObservableCollection<Product>();
+            Title = title;
+            Items = new ObservableCollection<Section>();
+            Products = new ObservableCollection<Product>();
+            Parent = parent;
         }
 
-        internal bool IsProductPresent(string name)
+        public bool IsProductPresent(string name)
         {
             foreach (var product in Products)
                 if (product.Name == name)
                     return false;
             return true;
+        }
+
+        public void Delete()
+        {
+            Parent.Items.Remove(this);
         }
     }
 }

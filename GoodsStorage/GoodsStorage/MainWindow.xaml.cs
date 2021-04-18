@@ -28,9 +28,9 @@ namespace GoodsStorage
             InitializeComponent();
             MessageBox.Show("ПКМ по нужному разделу, чтобы открыть контекстное меню");
             Section root = Section.ROOT;
-            Section first = new Section("First");
-            Section second = new Section("Second");
-            Section third = new Section("Third");
+            Section first = new Section("First", root);
+            Section second = new Section("Second", root);
+            Section third = new Section("Third", first);
             root.Items.Add(first);
             root.Items.Add(second);
             first.Items.Add(third);
@@ -39,7 +39,7 @@ namespace GoodsStorage
             root.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 1, Price = 324 });
             third.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 6, Price = 324 });
             first.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 3, Price = 324 });
-            
+
             treeMenu.Items.Add(Section.ROOT);
 
         }
@@ -137,10 +137,10 @@ namespace GoodsStorage
             menuCreate.Click += new RoutedEventHandler(
                 (s, args) =>
             {
-                
+
                 string name = (string)PromptDialog.Dialog.Prompt("Введите имя подраздела (оно должно быть уникальным в рамках раздела-предка)", "Новый раздел");
                 if (name == null)
-                { 
+                {
                     // Нажата кнопка cancel. 
                 }
                 else if (name == "")
@@ -149,12 +149,51 @@ namespace GoodsStorage
                     MessageBox.Show($"Подраздел с именем {name} уже существует в разделе {((Section)treeMenu.SelectedItem).Title}!");
                 else
                 {
-                    ((Section)treeMenu.SelectedItem).Items.Add(new Section(name));
+                    ((Section)treeMenu.SelectedItem).Items.Add(new Section(name, (Section)treeMenu.SelectedItem));
                     MessageBox.Show($"Подраздел с именем {name} успешно добавлен в раздел {((Section)treeMenu.SelectedItem).Title}!");
                 }
             });
+
+            MenuItem menuDelete = new MenuItem();
+            menuDelete.Header = "Удалить раздел";
+            menuDelete.Click += new RoutedEventHandler(
+               (s, args) =>
+               {
+                   ((Section)treeMenu.SelectedItem).Delete();
+                   MessageBox.Show($" Раздел {((Section)treeMenu.SelectedItem).Title} был удален!");
+
+               });
+
+            MenuItem menuChange = new MenuItem();
+            menuChange.Header = "Изменить имя раздела";
+            menuChange.Click += new RoutedEventHandler(
+                (s, args) =>
+                {
+
+                    string name = (string)PromptDialog.Dialog.Prompt("Введите новое имя раздела (оно должно быть уникальным в рамках раздела-предка)", "Изменение имени раздела");
+                    if (name == null)
+                    {
+                        // Нажата кнопка cancel. 
+                    }
+                    else if (name == "")
+                        MessageBox.Show("Неверное имя раздела!");
+                    else if (!((Section)treeMenu.SelectedItem).IsProductPresent(name))
+                        MessageBox.Show($"Подраздел с именем {name} уже существует в разделе {((Section)treeMenu.SelectedItem).Parent.Title}!");
+                    else
+                    {
+                        ((Section)treeMenu.SelectedItem).Title = name;
+                        treeMenu.Items.Clear();
+                        treeMenu.Items.Add(Section.ROOT);
+                        MessageBox.Show($"Имя раздела было изменено на {name}!");
+                    }
+                });
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.Items.Add(menuCreate);
+            if (((Section)treeMenu.SelectedItem) != Section.ROOT)
+            {
+                contextMenu.Items.Add(menuDelete);
+                contextMenu.Items.Add(menuChange);
+            }
             contextMenu.IsOpen = true;
         }
 
