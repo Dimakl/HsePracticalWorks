@@ -21,5 +21,13 @@ namespace GoodsStorage
             this.Items = new ObservableCollection<Section>();
             this.Products = new ObservableCollection<Product>();
         }
+
+        internal bool IsProductPresent(string name)
+        {
+            foreach (var product in Products)
+                if (product.Name == name)
+                    return false;
+            return true;
+        }
     }
 }

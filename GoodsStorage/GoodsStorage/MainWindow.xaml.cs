@@ -26,7 +26,7 @@ namespace GoodsStorage
         public MainWindow()
         {
             InitializeComponent();
-
+            MessageBox.Show("ПКМ по нужному разделу, чтобы открыть контекстное меню");
             Section root = Section.ROOT;
             Section first = new Section("First");
             Section second = new Section("Second");
@@ -125,18 +125,37 @@ namespace GoodsStorage
                 GetAllCsvProducts(fullPath, sec, products, n);
         }
 
-
         private void treeMenu_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
-
-            if (treeViewItem != null)
+            if (treeViewItem == null)
+                return;
+            treeViewItem.Focus();
+            e.Handled = true;
+            MenuItem menuCreate = new MenuItem();
+            menuCreate.Header = "Создать подраздел";
+            menuCreate.Click += new RoutedEventHandler(
+                (s, args) =>
             {
-                treeViewItem.Focus();
-                e.Handled = true;
-            }
-            MessageBox.Show(((Section)treeMenu.SelectedItem).Title);
-
+                
+                string name = (string)PromptDialog.Dialog.Prompt("Введите имя подраздела (оно должно быть уникальным в рамках раздела-предка)", "Новый раздел");
+                if (name == null)
+                { 
+                    // Нажата кнопка cancel. 
+                }
+                else if (name == "")
+                    MessageBox.Show("Неверное имя нового раздела!");
+                else if (!((Section)treeMenu.SelectedItem).IsProductPresent(name))
+                    MessageBox.Show($"Подраздел с именем {name} уже существует в разделе {((Section)treeMenu.SelectedItem).Title}!");
+                else
+                {
+                    ((Section)treeMenu.SelectedItem).Items.Add(new Section(name));
+                    MessageBox.Show($"Подраздел с именем {name} успешно добавлен в раздел {((Section)treeMenu.SelectedItem).Title}!");
+                }
+            });
+            ContextMenu contextMenu = new ContextMenu();
+            contextMenu.Items.Add(menuCreate);
+            contextMenu.IsOpen = true;
         }
 
         static TreeViewItem VisualUpwardSearch(DependencyObject source)
