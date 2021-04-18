@@ -26,26 +26,27 @@ namespace GoodsStorage
         public MainWindow()
         {
             InitializeComponent();
-            
+
             Section root = Section.ROOT;
             Section first = new Section("First");
-            Section second = new Section("Second"); 
+            Section second = new Section("Second");
             Section third = new Section("Third");
             root.Items.Add(first);
             root.Items.Add(second);
             first.Items.Add(third);
-            root.Products.Add(new Product() { Name = "Test", Code = "12312",LeftInStorage = 14, Price = 324 });
+            root.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 14, Price = 324 });
             root.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 123, Price = 324 });
             root.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 1, Price = 324 });
             third.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 6, Price = 324 });
             first.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 3, Price = 324 });
             
             treeMenu.Items.Add(Section.ROOT);
+
         }
 
         private void treeMenu_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Section item = (Section) treeMenu.SelectedItem;
+            Section item = (Section)treeMenu.SelectedItem;
             if (item == null)
                 return;
             productsGrid.ItemsSource = item.Products;
@@ -122,6 +123,28 @@ namespace GoodsStorage
                     products.Add(new CsvProduct(fullPath, product));
             foreach (var sec in section.Items)
                 GetAllCsvProducts(fullPath, sec, products, n);
+        }
+
+
+        private void treeMenu_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
+
+            if (treeViewItem != null)
+            {
+                treeViewItem.Focus();
+                e.Handled = true;
+            }
+            MessageBox.Show(((Section)treeMenu.SelectedItem).Title);
+
+        }
+
+        static TreeViewItem VisualUpwardSearch(DependencyObject source)
+        {
+            while (source != null && !(source is TreeViewItem))
+                source = VisualTreeHelper.GetParent(source);
+
+            return source as TreeViewItem;
         }
     }
 }

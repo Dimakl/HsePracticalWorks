@@ -22,7 +22,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition MaxHeight="100"></RowDefinition>
             </Grid.RowDefinitions>
-            <TreeView Grid.Column="0" Grid.Row="0" Name="treeMenu" MouseLeftButtonUp="treeMenu_MouseLeftButtonUp">
+            <TreeView Grid.Column="0" Grid.Row="0" Name="treeMenu" MouseLeftButtonUp="treeMenu_MouseLeftButtonUp" PreviewMouseRightButtonUp="treeMenu_PreviewMouseRightButtonUp">
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type Section}" ItemsSource="{Binding Items}">
                         <TextBlock Text="{Binding Title}" />
