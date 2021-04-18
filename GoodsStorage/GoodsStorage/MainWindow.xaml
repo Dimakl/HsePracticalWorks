@@ -38,9 +38,11 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Grid.Column="0" Grid.Row="0" Name="UploadJsonButton" Click="UploadJsonButton_Click" >
-                    <TextBlock>Выгрузить текущее состояние <LineBreak/>склада в storage.bin</TextBlock></Button>
+                    <TextBlock>Выгрузить текущее состояние <LineBreak/>склада в storage.bin</TextBlock>
+                </Button>
                 <Button Grid.Column="1" Grid.Row="0" Name="LoadJsonButton" Click="LoadJsonButton_Click">
-                    <TextBlock> Загрузить состояние <LineBreak/>склада из storage.bin</TextBlock></Button>
+                    <TextBlock> Загрузить состояние <LineBreak/>склада из storage.bin</TextBlock>
+                </Button>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="0">

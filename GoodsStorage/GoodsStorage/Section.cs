@@ -15,7 +15,7 @@ namespace GoodsStorage
         public ObservableCollection<Section> Items { get; set; }
         public ObservableCollection<Product> Products { get; private set; }
 
-        public Section Parent { get;}
+        public Section Parent { get; }
 
         public Section(string title, Section parent)
         {
