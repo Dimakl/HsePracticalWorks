@@ -27,19 +27,6 @@ namespace GoodsStorage
         {
             InitializeComponent();
             MessageBox.Show("ПКМ по нужному разделу, чтобы открыть контекстное меню");
-            Section root = Section.ROOT;
-            Section first = new Section("First", root);
-            Section second = new Section("Second", root);
-            Section third = new Section("Third", first);
-            root.Items.Add(first);
-            root.Items.Add(second);
-            first.Items.Add(third);
-            root.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 14, Price = 324 });
-            root.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 123, Price = 324 });
-            root.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 1, Price = 324 });
-            third.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 6, Price = 324 });
-            first.Products.Add(new Product() { Name = "Test", Code = "12312", LeftInStorage = 3, Price = 324 });
-
             treeMenu.Items.Add(Section.ROOT);
 
         }
