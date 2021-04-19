@@ -26,11 +26,16 @@ namespace GoodsStorage
         public MainWindow()
         {
             InitializeComponent();
-            MessageBox.Show("ПКМ по нужному разделу, чтобы открыть контекстное меню");
+            MessageBox.Show("ПКМ по нужному разделу, чтобы открыть контекстное меню. Root нельзя удалить или переименовать - это корневой раздел.");
             treeMenu.Items.Add(Section.ROOT);
 
         }
 
+        /// <summary>
+        /// Меняем выбранный элемент при клике на элемент treeMenu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeMenu_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             Section item = (Section)treeMenu.SelectedItem;
@@ -40,6 +45,11 @@ namespace GoodsStorage
             tableHelpText.Visibility = Visibility.Visible;
         }
 
+        /// <summary>
+        /// Выгружаем текущий Section.ROOT в бинарный файл. (UploadJson - просто имя кнопки).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UploadJsonButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -55,6 +65,11 @@ namespace GoodsStorage
             { }
         }
 
+        /// <summary>
+        /// Загружаем текущий Section.ROOT из бинарного файла. (LoadJson - просто имя кнопки).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadJsonButton_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -72,6 +87,12 @@ namespace GoodsStorage
             { }
         }
 
+
+        /// <summary>
+        /// Создаем csv файл с выбранными пользователем настройками при клике.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CreateCsv_Click(object sender, RoutedEventArgs e)
         {
             string input = csvInput.Text;
@@ -99,6 +120,13 @@ namespace GoodsStorage
             }
         }
 
+        /// <summary>
+        /// Получаем полный список товаров для упаковки в csv.
+        /// </summary>
+        /// <param name="fullPath"></param>
+        /// <param name="section"></param>
+        /// <param name="products"></param>
+        /// <param name="n"></param>
         private void GetAllCsvProducts(string fullPath, Section section, List<CsvProduct> products, int n)
         {
             if (fullPath.Length == 0)
@@ -112,6 +140,12 @@ namespace GoodsStorage
                 GetAllCsvProducts(fullPath, sec, products, n);
         }
 
+        
+        /// <summary>
+        /// Вызываем контекстное меню при ПКМ на treeMenu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void treeMenu_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
             TreeViewItem treeViewItem = VisualUpwardSearch(e.OriginalSource as DependencyObject);
@@ -140,6 +174,11 @@ namespace GoodsStorage
             contextMenu.IsOpen = true;
         }
 
+
+        /// <summary>
+        /// Добавляем Click к menuChange кнопке контекстного меню.
+        /// </summary>
+        /// <param name="menuChange"></param>
         private void SetupMenuChange(MenuItem menuChange)
         {
             menuChange.Click += new RoutedEventHandler(
@@ -165,6 +204,11 @@ namespace GoodsStorage
                             });
         }
 
+
+        /// <summary>
+        /// Добавляем Click к menuDelete кнопке контекстного меню.
+        /// </summary>
+        /// <param name="menuDelete"></param>
         private void SetupMenuDelete(MenuItem menuDelete)
         {
             menuDelete.Click += new RoutedEventHandler(
@@ -176,6 +220,11 @@ namespace GoodsStorage
                            });
         }
 
+
+        /// <summary>
+        /// Добавляем Click к menuCreate кнопке контекстного меню.
+        /// </summary>
+        /// <param name="menuCreate"></param>
         private void SetupMenuCreate(MenuItem menuCreate)
         {
             menuCreate.Click += new RoutedEventHandler(
@@ -199,6 +248,11 @@ namespace GoodsStorage
                             });
         }
 
+        /// <summary>
+        /// Ищем ту ноду, на которую пользователь нажал при помощи ПКМ.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         static TreeViewItem VisualUpwardSearch(DependencyObject source)
         {
             while (source != null && !(source is TreeViewItem))

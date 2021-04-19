@@ -5,6 +5,9 @@ using System.Text;
 
 namespace GoodsStorage
 {
+    /// <summary>
+    /// Класс товара для выгрузки в CSV.
+    /// </summary>
     class CsvProduct
     {
         [Name("Full path to product")]

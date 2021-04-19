@@ -4,6 +4,10 @@ using System.Text;
 
 namespace GoodsStorage
 {
+
+    /// <summary>
+    /// Класс товара.
+    /// </summary>
     [Serializable]
     class Product
     {
@@ -13,12 +17,6 @@ namespace GoodsStorage
         public int LeftInStorage { get; set; }
         public Product()
         {
-        }
-
-        public override string ToString()
-        {
-            return $"Название:{Name},Код:{Code}," +
-                $"Цена:{Price},Осталось:{LeftInStorage}";
         }
     }
 }

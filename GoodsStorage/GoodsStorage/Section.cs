@@ -6,6 +6,9 @@ using System.Windows.Controls;
 
 namespace GoodsStorage
 {
+    /// <summary>
+    /// Класс раздела, Section.ROOT - корень.
+    /// </summary>
     [Serializable]
     class Section
     {
