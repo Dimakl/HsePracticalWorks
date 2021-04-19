@@ -121,59 +121,15 @@ namespace GoodsStorage
             e.Handled = true;
             MenuItem menuCreate = new MenuItem();
             menuCreate.Header = "Создать подраздел";
-            menuCreate.Click += new RoutedEventHandler(
-                (s, args) =>
-            {
-
-                string name = (string)PromptDialog.Dialog.Prompt("Введите имя подраздела (оно должно быть уникальным в рамках раздела-предка)", "Новый раздел");
-                if (name == null)
-                {
-                    // Нажата кнопка cancel. 
-                }
-                else if (name == "")
-                    MessageBox.Show("Неверное имя нового раздела!");
-                else if (!((Section)treeMenu.SelectedItem).IsProductPresent(name))
-                    MessageBox.Show($"Подраздел с именем {name} уже существует в разделе {((Section)treeMenu.SelectedItem).Title}!");
-                else
-                {
-                    ((Section)treeMenu.SelectedItem).Items.Add(new Section(name, (Section)treeMenu.SelectedItem));
-                    MessageBox.Show($"Подраздел с именем {name} успешно добавлен в раздел {((Section)treeMenu.SelectedItem).Title}!");
-                }
-            });
+            SetupMenuCreate(menuCreate);
 
             MenuItem menuDelete = new MenuItem();
             menuDelete.Header = "Удалить раздел";
-            menuDelete.Click += new RoutedEventHandler(
-               (s, args) =>
-               {
-                   ((Section)treeMenu.SelectedItem).Delete();
-                   MessageBox.Show($" Раздел {((Section)treeMenu.SelectedItem).Title} был удален!");
-
-               });
+            SetupMenuDelete(menuDelete);
 
             MenuItem menuChange = new MenuItem();
             menuChange.Header = "Изменить имя раздела";
-            menuChange.Click += new RoutedEventHandler(
-                (s, args) =>
-                {
-
-                    string name = (string)PromptDialog.Dialog.Prompt("Введите новое имя раздела (оно должно быть уникальным в рамках раздела-предка)", "Изменение имени раздела");
-                    if (name == null)
-                    {
-                        // Нажата кнопка cancel. 
-                    }
-                    else if (name == "")
-                        MessageBox.Show("Неверное имя раздела!");
-                    else if (!((Section)treeMenu.SelectedItem).IsProductPresent(name))
-                        MessageBox.Show($"Подраздел с именем {name} уже существует в разделе {((Section)treeMenu.SelectedItem).Parent.Title}!");
-                    else
-                    {
-                        ((Section)treeMenu.SelectedItem).Title = name;
-                        treeMenu.Items.Clear();
-                        treeMenu.Items.Add(Section.ROOT);
-                        MessageBox.Show($"Имя раздела было изменено на {name}!");
-                    }
-                });
+            SetupMenuChange(menuChange);
             ContextMenu contextMenu = new ContextMenu();
             contextMenu.Items.Add(menuCreate);
             if (((Section)treeMenu.SelectedItem) != Section.ROOT)
@@ -182,6 +138,65 @@ namespace GoodsStorage
                 contextMenu.Items.Add(menuChange);
             }
             contextMenu.IsOpen = true;
+        }
+
+        private void SetupMenuChange(MenuItem menuChange)
+        {
+            menuChange.Click += new RoutedEventHandler(
+                            (s, args) =>
+                            {
+
+                                string name = (string)PromptDialog.Dialog.Prompt("Введите новое имя раздела (оно должно быть уникальным в рамках раздела-предка)", "Изменение имени раздела");
+                                if (name == null)
+                                {
+                                    // Нажата кнопка cancel. 
+                                }
+                                else if (name == "")
+                                    MessageBox.Show("Неверное имя раздела!");
+                                else if (!((Section)treeMenu.SelectedItem).IsProductPresent(name))
+                                    MessageBox.Show($"Подраздел с именем {name} уже существует в разделе {((Section)treeMenu.SelectedItem).Parent.Title}!");
+                                else
+                                {
+                                    ((Section)treeMenu.SelectedItem).Title = name;
+                                    treeMenu.Items.Clear();
+                                    treeMenu.Items.Add(Section.ROOT);
+                                    MessageBox.Show($"Имя раздела было изменено на {name}!");
+                                }
+                            });
+        }
+
+        private void SetupMenuDelete(MenuItem menuDelete)
+        {
+            menuDelete.Click += new RoutedEventHandler(
+                           (s, args) =>
+                           {
+                               ((Section)treeMenu.SelectedItem).Delete();
+                               MessageBox.Show($" Раздел {((Section)treeMenu.SelectedItem).Title} был удален!");
+
+                           });
+        }
+
+        private void SetupMenuCreate(MenuItem menuCreate)
+        {
+            menuCreate.Click += new RoutedEventHandler(
+                            (s, args) =>
+                            {
+
+                                string name = (string)PromptDialog.Dialog.Prompt("Введите имя подраздела (оно должно быть уникальным в рамках раздела-предка)", "Новый раздел");
+                                if (name == null)
+                                {
+                                    // Нажата кнопка cancel. 
+                                }
+                                else if (name == "")
+                                    MessageBox.Show("Неверное имя нового раздела!");
+                                else if (!((Section)treeMenu.SelectedItem).IsProductPresent(name))
+                                    MessageBox.Show($"Подраздел с именем {name} уже существует в разделе {((Section)treeMenu.SelectedItem).Title}!");
+                                else
+                                {
+                                    ((Section)treeMenu.SelectedItem).Items.Add(new Section(name, (Section)treeMenu.SelectedItem));
+                                    MessageBox.Show($"Подраздел с именем {name} успешно добавлен в раздел {((Section)treeMenu.SelectedItem).Title}!");
+                                }
+                            });
         }
 
         static TreeViewItem VisualUpwardSearch(DependencyObject source)
