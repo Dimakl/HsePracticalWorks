@@ -1,1 +1,1 @@
-Small C# projects, done as homework for university programming classes.
+Small C# projects, done as peer reviewed homework for HSE programming course.
