@@ -140,7 +140,7 @@ namespace GoodsStorage
                 GetAllCsvProducts(fullPath, sec, products, n);
         }
 
-        
+
         /// <summary>
         /// Вызываем контекстное меню при ПКМ на treeMenu.
         /// </summary>
