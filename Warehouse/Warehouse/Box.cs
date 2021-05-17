@@ -28,7 +28,7 @@ namespace Warehouse
         /// <returns></returns>
         public override string ToString()
         {
-            return $"Box info: mass - {Mass}, cost for kilo - {CostForKilo};\n";
+            return $"Box info: mass - {Mass}, cost for kilo - {CostForKilo};\n\n";
         }
     }
 }
